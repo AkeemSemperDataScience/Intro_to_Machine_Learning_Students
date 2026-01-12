@@ -55,6 +55,7 @@ jobs:
           rm -f SAMP_SOL*
           rm -rf student_work
           rm -rf old
+          rm -rf TORCH*
           #rm -f generate_tests.ipynb
           #ls -la workbooks
 
