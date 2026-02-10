@@ -152,3 +152,21 @@ class edaDF:
         with out3:
             fig3 = self.histPlots(kde=True, show=False)
             plt.show(fig3)
+
+import os
+import urllib
+class DownloadFromGithub:
+
+    def __init__(self, filename, folder_url=""):
+        self.filename = filename
+        self.folder_url = folder_url
+    
+    def get_dataframe(self, **kwargs):
+        url = self.folder_url + self.filename
+        df = pd.read_csv(url, **kwargs)
+        return df
+    
+    def downloadToPath(self, path):
+        url = self.folder_url + self.filename
+        file = urllib.request.urlretrieve(url, os.path.join(path, self.filename))
+        return file
