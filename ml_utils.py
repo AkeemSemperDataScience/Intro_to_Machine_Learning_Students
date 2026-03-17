@@ -254,3 +254,31 @@ class DownloadFromGithub:
         url = self.folder_url + self.filename
         file = urllib.request.urlretrieve(url, os.path.join(path, self.filename))
         return file
+    
+'''# Play with these for different visualization. 
+IMAGE_ALPHA = 0.4
+SAL_MAP_ALPHA = 0.9
+COLOR_MAP = "jet"
+
+indices = [SAMPLE_IMAGE_INDEX, 25, 192, 66, 123, 45, 78, 150, 450, 993]
+fig, axes = plt.subplots(2, 5, figsize=(20, 5))
+columns = 5
+for ax_idx, img_idx in enumerate(indices):
+    sal = cnn_model.getSalienceMaps(sal_image=train_data[img_idx][0])
+    sal_img = (sal - sal.min()) / (sal.max() - sal.min() + 1e-10)
+    sal_img = sal_img.to('cpu').numpy()
+    
+    s_image = train_data[img_idx][0]
+    s_image = (s_image - s_image.min()) / (s_image.max() - s_image.min() + 1e-10)
+    
+    if ax_idx >= columns:
+        axes[1, ax_idx - columns].imshow(sal_img, cmap=COLOR_MAP, alpha=SAL_MAP_ALPHA)
+        axes[1, ax_idx - columns].imshow(s_image.permute(1, 2, 0).cpu().numpy(), alpha=IMAGE_ALPHA)
+        axes[1, ax_idx - columns].set_title(f'Class: {train_data.classes[train_data[img_idx][1]]} (idx={img_idx})')
+        axes[1, ax_idx - columns].axis('off')
+    else:
+        axes[0, ax_idx].imshow(sal_img, cmap=COLOR_MAP, alpha=SAL_MAP_ALPHA)
+        axes[0, ax_idx].imshow(s_image.permute(1, 2, 0).cpu().numpy(), alpha=IMAGE_ALPHA)
+        axes[0, ax_idx].set_title(f'Class: {train_data.classes[train_data[img_idx][1]]} (idx={img_idx})')
+        axes[0, ax_idx].axis('off')
+plt.show()'''
